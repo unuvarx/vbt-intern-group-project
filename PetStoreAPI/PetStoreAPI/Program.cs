@@ -1,4 +1,3 @@
-
 using AutoMapper;
 using MailKit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -27,19 +26,22 @@ builder.Host.UseSerilog((hostingContext, loggerConfiguration) =>
 // Diðer servis kayýtlarý
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("ApiSettings:JwtOptions"));
-// Add services to the container.
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
-builder.Services.AddControllers();
 
+// Add services to the container.
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<AppDbContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.AddControllers();
 
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 builder.Services.AddScoped<IAuthService, AuthService>();
-
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(option =>
@@ -62,22 +64,42 @@ builder.Services.AddSwaggerGen(option =>
                     Type = ReferenceType.SecurityScheme,
                     Id = JwtBearerDefaults.AuthenticationScheme
                 }
-            },new string[] { }
+            },
+            new string[] { }
         }
     });
 });
 builder.AddAppAuthetication();
 builder.Services.AddAuthorization();
-builder.Services.AddSwaggerGen();
 
+// CORS ayarlarý
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowSpecificOrigin", builder =>
+    // Local geliþtirme ortamý için izin verilecek adresler
+    options.AddPolicy("LocalDevelopmentCors", policy =>
     {
-        builder.WithOrigins("https://paficapiv2.justkey.online/", "https://paficapi.justkey.online/")
-               .AllowAnyMethod()
-               .AllowAnyHeader()
-               .AllowCredentials();
+        policy.WithOrigins(
+                "https://localhost:7251",
+                "http://localhost:5294",
+                "http://localhost:35160",
+                "https://localhost:44319"
+            )
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+    });
+
+    // Yayýn ortamýnda izin verilecek adresler
+    options.AddPolicy("AllowSpecificOrigin", policy =>
+    {
+        policy.WithOrigins(
+                "https://paficapiv2.justkey.online/",
+                "https://paficapi.justkey.online/",
+                "https://petstoreapi.justkey.online"
+            )
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
     });
 });
 
@@ -88,7 +110,17 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 app.UseRouting();
-app.UseCors("AllowSpecificOrigin");
+
+// Ortama göre doðru CORS politikasýný uygula
+if (app.Environment.IsDevelopment())
+{
+    app.UseCors("LocalDevelopmentCors");
+}
+else
+{
+    app.UseCors("AllowSpecificOrigin");
+}
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseStaticFiles();
