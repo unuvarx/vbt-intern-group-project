@@ -4,14 +4,14 @@ import { Link } from "react-router";
 type ButtonProps = {
     isLink?: boolean;
     href?: string;
-    classNames?: string;
-    children: React.ReactElement[] | string;
+    className?: string;
+    children: React.ReactNode;
 };
 
 export default function Button({
     isLink = false,
     href = "/",
-    classNames = "",
+    className = "",
     children,
 }: ButtonProps) {
     const Component = isLink ? Link : "button";
@@ -19,7 +19,10 @@ export default function Button({
     return (
         <Component
             to={isLink ? href : ""}
-            className={`${classNames} text-white bg-primary rounded-full py-4 px-8 hover:bg-primary/90 transition-colors text-nowrap `}
+            className={
+                "text-white bg-primary rounded-full py-4 px-8 hover:bg-primary/90 transition-colors text-nowrap " +
+                className
+            }
         >
             {children}
         </Component>

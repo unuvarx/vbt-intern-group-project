@@ -21,7 +21,7 @@ export default function Header() {
                         <Button
                             isLink
                             href="/profile"
-                            classNames="!flex-center gap-2"
+                            className="!flex-center gap-2"
                         >
                             <UserCircle2 />
                             <span>Profile</span>

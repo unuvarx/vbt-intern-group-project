@@ -9,7 +9,7 @@ export default function RootLayout() {
             <Header />
             <Outlet />
             <Footer />
-            <ToastContainer />
+            <ToastContainer aria-label="Bildirimler" />
         </>
     );
 }
