@@ -1,19 +1,20 @@
-# Proje Adı: [Buraya Proje Adını Yazın]
+# Proje - Pet Store
 
 Bu proje, hayvan sahiplendirmek için oluşturulmuş bir topluluk platformudur.
 
 ## Kullanılan Teknolojiler
-* [Teknoloji 1]
-* [Teknoloji 2]
-* [Teknoloji 3]
+* Back-end: .Net Core Web Api, Sql Server
+* Front-end: Next.j
+* Mobile: Flutter
+* Ai: Flask, Gemini
+
 
 ## Kurulum ve Çalıştırma
-Projeyi kendi bilgisayarınızda çalıştırmak için aşağıdaki adımları izleyin:
 
-1.  Bu repoyu klonlayın: `git clone [REPO_URL]`
-2.  Proje dizinine gidin: `cd [PROJE_KLASORU]`
-3.  Gerekli paketleri yükleyin: `npm install` (veya `dotnet restore`, `pip install -r requirements.txt`)
-4.  Projeyi başlatın: `npm run dev` (veya `dotnet run`)
+1. Front-end => https://vbt-petshop.vercel.app
+2. Back-end => https://petstoreapi.justkey.online/swagger/index.html
+3. Ai => https://unuvarx.pythonanywhere.com/
+4. Flutter => Gerekli bilgiler source/pet_store/mobile/README.md dosyasında mevcuttur.
 
 ## Ekran Görüntüleri
 ![Ekran Görüntüsü](./images/1.png)
