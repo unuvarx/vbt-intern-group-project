@@ -4,7 +4,7 @@ Bu proje, hayvan sahiplendirmek için oluşturulmuş bir topluluk platformudur.
 
 ## Kullanılan Teknolojiler
 * Back-end: .Net Core Web Api, Sql Server
-* Front-end: Next.js
+* Front-end: Vite, React.js
 * Mobile: Flutter
 * Ai: Flask, Gemini
 
