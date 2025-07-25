@@ -17,6 +17,7 @@ Bu proje, hayvan sahiplendirmek için oluşturulmuş bir topluluk platformudur.
 4. Flutter => Gerekli bilgiler source/pet_store/mobile/README.md dosyasında mevcuttur.
 
 ## Ekran Görüntüleri
+![Ekran Görüntüsü](./images/trello.png)
 ![Ekran Görüntüsü](./images/1.png)
 ![Ekran Görüntüsü](./images/2.png)
 ![Ekran Görüntüsü](./images/3.png)
