@@ -34,7 +34,7 @@ Kullanıcının yaşam tarzına göre evcil hayvan önerir.
 
 ```json
 {
-  "lifestyle": "apartmanda yaşayan, çocuklu aile"
+  "preferences": "apartmanda yaşayan, çocuklu aile"
 }
 ```
 
